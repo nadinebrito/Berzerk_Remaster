@@ -7,7 +7,7 @@ namespace Script.Enemy.Movement
     {
         public void ShootEnemy(float moveX, float moveY,bool shoot, int diff)
         {
-            FireBullet(moveX,moveY,shoot,diff);
+            FireBullet(moveX,moveY,shoot,diff,false);
         }
         
     }

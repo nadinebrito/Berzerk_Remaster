@@ -19,7 +19,7 @@ namespace Script.Player.Movement
 
         private void FixedUpdate()
         {
-            FireBullet(_moveX,_moveY,_shooting,_force);
+            FireBullet(_moveX,_moveY,_shooting,_force,true);
         }
         
     }

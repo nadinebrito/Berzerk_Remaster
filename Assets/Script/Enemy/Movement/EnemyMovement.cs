@@ -26,6 +26,7 @@ namespace Script.Enemy.Movement
             if (_isDead) return;
             if (other.CompareTag("Player") || other.CompareTag("BulletPlayer") || other.CompareTag("BulletEnemy")||other.CompareTag("Enemy") ||other.CompareTag("Wall")||other.CompareTag("Otto"))
             {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/EnemyDeath");
                 Rb2d.bodyType = RigidbodyType2D.Static;
                 _isDead = true;
                 GameObject.Find("GameController").GetComponent<GameController>().EnemyDeathScore();

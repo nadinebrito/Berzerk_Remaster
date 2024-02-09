@@ -1,4 +1,5 @@
 using System;
+using FMOD;
 using UnityEngine;
 
 namespace Script.Behavior
@@ -11,7 +12,6 @@ namespace Script.Behavior
         protected Transform PlayerGameObject;
         private Vector2 _newDirection;
         
-        
         private void Start()
         {
             BulletGameObject = Instantiate(bulletPrefab, new Vector3(0, 0, 0), Quaternion.identity);
@@ -21,10 +21,23 @@ namespace Script.Behavior
             
         }
 
-        protected void FireBullet(float moveX, float moveY, bool shooting, int force)
+        
+        protected void FireBullet(float moveX, float moveY, bool shooting, int force , bool player)
         {
             
             if (!shooting || BulletGameObject.activeSelf) return;
+            if (player)
+            {
+                
+                FMODUnity.RuntimeManager.PlayOneShot("event:/PlayerShoot");
+            }
+
+            if (!player)
+            {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/EnemyShoot");
+            }
+
+            
             BulletRotation(moveX,moveY);
             
             if (moveX == 0 && moveY == 0)

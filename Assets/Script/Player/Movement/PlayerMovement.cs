@@ -38,6 +38,7 @@ namespace Script.Player.Movement
         {
             if ((other.CompareTag("BulletEnemy") && !_isDead) || (other.CompareTag("Enemy")&& !_isDead) || ( other.CompareTag("Wall")&& !_isDead) || ( other.CompareTag("Otto")&& !_isDead))
             {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/PlayerDeath");
                 GunSystem.SetActive(false);
                 Rb2d.bodyType = RigidbodyType2D.Static;
                 _isDead = true;

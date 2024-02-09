@@ -103,6 +103,7 @@ namespace Script.Game
 
         private void NewGame()
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/EnemyDeath");
             LifeSystem.NewGame();
             _actRoomNumber = 1;
             _mainCamera.GetComponent<Camera>().backgroundColor = Color.blue;
@@ -118,8 +119,6 @@ namespace Script.Game
             _room = Random.Range(0,4);
             DoorsCondition(0);
             GenerateRoom(_room);
-            
-            
         }
 
         private void FixedUpdate()
@@ -168,6 +167,7 @@ namespace Script.Game
 
         private void FirstRoom()
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/EnemyDeath");
             _startOtto = Time.fixedTime;
             _playerMovement.Revive();
             StartCoroutine(TimeToPlayer(new Vector3(-7.5f, 0.5f, 0f)));
@@ -235,6 +235,7 @@ namespace Script.Game
             
             if (scoreHun < (_roomScoreInt))
             {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/GainLife");
                 scoreHun += 1000;
                 _allLife += 1;
                 LifeSystem.GainLife(_allLife);
@@ -289,6 +290,7 @@ namespace Script.Game
                 {
                     scoreHun += 1000;
                     _allLife += 1;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/GainLife");
                     LifeSystem.GainLife(_allLife);
                 }
             }
@@ -329,6 +331,7 @@ namespace Script.Game
         
         public void NextRoom(string position)
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/EnemyDeath");
             CleanRoom();
             
             _startOtto = Time.fixedTime;
