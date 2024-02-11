@@ -172,18 +172,10 @@ namespace Script.Game
             _playerMovement.Revive();
             StartCoroutine(TimeToPlayer(new Vector3(-7.5f, 0.5f, 0f)));
             ottoGameObject.transform.position = (new Vector3(-7.5f, 0.5f, 0f));
-            StartCoroutine(GenRoom());
+            StartCoroutine(TimeToRoom(0,true));
             _mainCamera.GetComponent<Camera>().backgroundColor = Color.black;
             
 
-        }
-
-        private IEnumerator GenRoom()
-        {
-            yield return new WaitForSeconds(0.9f);
-            _room = Random.Range(0,4);
-            DoorsCondition(0);
-            GenerateRoom(_room);
         }
 
         private IEnumerator TimeToPlayer(Vector3 pos)
@@ -286,7 +278,7 @@ namespace Script.Game
                 
                 _roomScore.GetComponent<TextMeshProUGUI>().text = Convert.ToString(_roomScoreInt);
 
-                if (scoreHun < _roomScoreInt)
+                if (scoreHun <= _roomScoreInt)
                 {
                     scoreHun += 1000;
                     _allLife += 1;
@@ -321,12 +313,24 @@ namespace Script.Game
         }
         
         
-        private IEnumerator TimeToRoom(int door)
+        private IEnumerator TimeToRoom(int door, bool newGame)
         {
-            yield return new WaitForSeconds(1f);
-            _room = Random.Range(0,4);
-            GenerateRoom(_room);
-            DoorsCondition(door);
+            if (newGame)
+            {
+                yield return new WaitForSeconds(0.9f);
+                _room = Random.Range(0,4);
+                DoorsCondition(0);
+                GenerateRoom(_room);
+            }
+
+            else
+            {
+                yield return new WaitForSeconds(1f);
+                _room = Random.Range(0,4);
+                GenerateRoom(_room);
+                DoorsCondition(door);
+            }
+            
         }
         
         public void NextRoom(string position)
@@ -340,7 +344,7 @@ namespace Script.Game
             if (position == "Up")
             {
                 _fadeAnimator.Play("Fade4");
-                StartCoroutine(TimeToRoom(1));
+                StartCoroutine(TimeToRoom(1,false));
                 StartCoroutine(TimeToPlayer(new Vector3(0f, -2.5f, 0)));
                 ottoGameObject.transform.position = (new Vector3(0f, -2.5f, 0));
             }
@@ -348,7 +352,7 @@ namespace Script.Game
             if (position == "Down")
             {
                 _fadeAnimator.Play("Fade3");
-                StartCoroutine(TimeToRoom(2));
+                StartCoroutine(TimeToRoom(2,false));
                 StartCoroutine(TimeToPlayer(new Vector3(0f, 3.5f, 0)));
                 ottoGameObject.transform.position = (new Vector3(0f, 3.5f, 0));
             }
@@ -356,7 +360,7 @@ namespace Script.Game
             if (position == "Left")
             {
                 _fadeAnimator.Play("Fade1");
-                StartCoroutine(TimeToRoom(3));
+                StartCoroutine(TimeToRoom(3,false));
                 StartCoroutine(TimeToPlayer(new Vector3(7.75f, 0.5f, 0)));
                 ottoGameObject.transform.position = (new Vector3(7.75f, 0.5f, 0));
             }
@@ -364,7 +368,7 @@ namespace Script.Game
             if (position == "Right")
             {
                 _fadeAnimator.Play("Fade1");
-                StartCoroutine(TimeToRoom(4));
+                StartCoroutine(TimeToRoom(4,false));
                 StartCoroutine(TimeToPlayer(new Vector3(-7.75f, 0.5f, 0)));
                 ottoGameObject.transform.position = (new Vector3(-7.75f, 0.5f, 0));
             }

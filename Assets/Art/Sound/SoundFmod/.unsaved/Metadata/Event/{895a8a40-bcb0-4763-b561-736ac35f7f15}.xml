@@ -212,9 +212,6 @@
 		<property name="lowGain">
 			<value>-1</value>
 		</property>
-		<property name="midGain">
-			<value>-7.5</value>
-		</property>
 		<property name="highGain">
 			<value>-8</value>
 		</property>

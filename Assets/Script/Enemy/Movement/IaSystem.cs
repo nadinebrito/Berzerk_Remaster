@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Script.Enemy.Movement
 {
@@ -58,6 +59,13 @@ namespace Script.Enemy.Movement
         
         private void Ia()
         {
+
+            int speedIa = (9 * (difficult - 1) / 15) + 1;
+
+            if (speedIa > 10)
+            {
+                speedIa = 10;
+            }
             
             if (_action)
             {
@@ -66,7 +74,7 @@ namespace Script.Enemy.Movement
                     if(_playerGameObject.transform.position.x-0.3f < gameObject.transform.position.x)
                     {
                         _enemyMovement.AnimaEnemy(0, 0, false);
-                        _enemyMovement.MoveEnemy(0,0,difficult,false);
+                        _enemyMovement.MoveEnemy(0,0,speedIa,false);
                         _iaCooldown = false;
                         _directions = 0;
                         _action = false;
@@ -74,7 +82,7 @@ namespace Script.Enemy.Movement
                     if (_playerGameObject.transform.position.x-0.3f > gameObject.transform.position.x)
                     {
                         _enemyMovement.AnimaEnemy(1, 0, false);
-                        _enemyMovement.MoveEnemy(1,0,difficult,false);
+                        _enemyMovement.MoveEnemy(1,0,speedIa,false);
                     }
                     
                 }
@@ -83,7 +91,7 @@ namespace Script.Enemy.Movement
                     if(_playerGameObject.transform.position.y < gameObject.transform.position.y)
                     {
                         _enemyMovement.AnimaEnemy(0, 0, false);
-                        _enemyMovement.MoveEnemy(0,0,difficult,false);
+                        _enemyMovement.MoveEnemy(0,0,speedIa,false);
                         _iaCooldown = false;
                         _directions = 0;
                         _action = false;
@@ -91,7 +99,7 @@ namespace Script.Enemy.Movement
                     if (_playerGameObject.transform.position.y > gameObject.transform.position.y)
                     {
                         _enemyMovement.AnimaEnemy(0, 1, false);
-                        _enemyMovement.MoveEnemy(0,1,difficult,false);
+                        _enemyMovement.MoveEnemy(0,1,speedIa,false);
                     }
                     
                 }
@@ -100,7 +108,7 @@ namespace Script.Enemy.Movement
                     if(_playerGameObject.transform.position.x+0.3f > gameObject.transform.position.x)
                     {
                         _enemyMovement.AnimaEnemy(0, 0, false);
-                        _enemyMovement.MoveEnemy(0,0,difficult,false);
+                        _enemyMovement.MoveEnemy(0,0,speedIa,false);
                         _iaCooldown = false;
                         _directions = 0;
                         _action = false;
@@ -108,7 +116,7 @@ namespace Script.Enemy.Movement
                     if (_playerGameObject.transform.position.x+0.3f < gameObject.transform.position.x)
                     {
                         _enemyMovement.AnimaEnemy(-1, 0, false);
-                        _enemyMovement.MoveEnemy(-1,0,difficult,false);
+                        _enemyMovement.MoveEnemy(-1,0,speedIa,false);
                     }
                     
                 }
@@ -117,7 +125,7 @@ namespace Script.Enemy.Movement
                     if(_playerGameObject.transform.position.y > gameObject.transform.position.y)
                     {
                         _enemyMovement.AnimaEnemy(0, 0, false);
-                        _enemyMovement.MoveEnemy(0,0,difficult,false);
+                        _enemyMovement.MoveEnemy(0,0,speedIa,false);
                         _iaCooldown = false;
                         _directions = 0;
                         _action = false;
@@ -125,7 +133,7 @@ namespace Script.Enemy.Movement
                     if (_playerGameObject.transform.position.y < gameObject.transform.position.y)
                     {
                         _enemyMovement.AnimaEnemy(0, -1, false);
-                        _enemyMovement.MoveEnemy(0,-1,difficult,false);
+                        _enemyMovement.MoveEnemy(0,-1,speedIa,false);
                     }
                     
                 }
@@ -136,7 +144,7 @@ namespace Script.Enemy.Movement
                     if(_distY > 0.5f)
                     {
                         _enemyMovement.AnimaEnemy(0, 0, false);
-                        _enemyShoot.ShootEnemy(0,0,false, difficult);
+                        _enemyShoot.ShootEnemy(0,0,false, speedIa);
                         _iaCooldown = false;
                         _directions = 0;
                         _action = false;
@@ -144,7 +152,7 @@ namespace Script.Enemy.Movement
                     if (_distY < 0.5f)
                     {
                         _enemyMovement.AnimaEnemy(1, 0, true);
-                        _enemyShoot.ShootEnemy(1,0,true,difficult);
+                        _enemyShoot.ShootEnemy(1,0,true,speedIa);
                     }
                 }
                 if (_directions == 6)
@@ -154,7 +162,7 @@ namespace Script.Enemy.Movement
                     if(_distX > 0.5f)
                     {
                         _enemyMovement.AnimaEnemy(0, 0, false);
-                        _enemyShoot.ShootEnemy(0,0,false, difficult);
+                        _enemyShoot.ShootEnemy(0,0,false, speedIa);
                         _iaCooldown = false;
                         _directions = 0;
                         _action = false;
@@ -162,7 +170,7 @@ namespace Script.Enemy.Movement
                     if (_distX < 0.5f)
                     {
                         _enemyMovement.AnimaEnemy(0, 1, true);
-                        _enemyShoot.ShootEnemy(0,1,true,difficult);
+                        _enemyShoot.ShootEnemy(0,1,true,speedIa);
                     }
                 }
                 if (_directions == 7)
@@ -172,7 +180,7 @@ namespace Script.Enemy.Movement
                     if(_distY > 0.5f)
                     {
                         _enemyMovement.AnimaEnemy(0, 0, false);
-                        _enemyShoot.ShootEnemy(0,0,false, difficult);
+                        _enemyShoot.ShootEnemy(0,0,false, speedIa);
                         _iaCooldown = false;
                         _directions = 0;
                         _action = false;
@@ -180,7 +188,7 @@ namespace Script.Enemy.Movement
                     if (_distY < 0.5f)
                     {
                         _enemyMovement.AnimaEnemy(-1, 0, true);
-                        _enemyShoot.ShootEnemy(-1,0,true,difficult);
+                        _enemyShoot.ShootEnemy(-1,0,true,speedIa);
                     }
                 }
                 if (_directions == 8)
@@ -190,7 +198,7 @@ namespace Script.Enemy.Movement
                     if(_distX > 0.5f)
                     {
                         _enemyMovement.AnimaEnemy(0, 0, false);
-                        _enemyShoot.ShootEnemy(0,0,false, difficult);
+                        _enemyShoot.ShootEnemy(0,0,false, speedIa);
                         _iaCooldown = false;
                         _directions = 0;
                         _action = false;
@@ -198,7 +206,7 @@ namespace Script.Enemy.Movement
                     if (_distX < 0.5f)
                     {
                         _enemyMovement.AnimaEnemy(0, -1, true);
-                        _enemyShoot.ShootEnemy(0,-1,true,difficult);
+                        _enemyShoot.ShootEnemy(0,-1,true,speedIa);
                     }
                 }
             }
@@ -208,8 +216,17 @@ namespace Script.Enemy.Movement
         private IEnumerator Cooldown()
         {
             _iaCooldown = true;
+
+            float rd = 5.5f - (0.275f * difficult);
+
+            if (rd < 1)
+            {
+                rd = 1;
+            }
             
-            yield return new WaitForSeconds(8f/difficult);
+            float ran = Random.Range(rd, rd + 1f);
+            
+            yield return new WaitForSeconds(ran);
 
             var position = _playerGameObject.transform.position;
             var position1 = gameObject.transform.position;
