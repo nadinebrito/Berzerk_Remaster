@@ -32,7 +32,6 @@ namespace Script.Game
         private PlayerMovement _playerMovement;
         
         private int _room;
-        private int _actRoom;
 
         private bool _onMenu;
         private bool _start;
@@ -172,7 +171,7 @@ namespace Script.Game
             _playerMovement.Revive();
             StartCoroutine(TimeToPlayer(new Vector3(-7.5f, 0.5f, 0f)));
             ottoGameObject.transform.position = (new Vector3(-7.5f, 0.5f, 0f));
-            StartCoroutine(TimeToRoom(0,true));
+            StartCoroutine(TimeToRoom(0));
             _mainCamera.GetComponent<Camera>().backgroundColor = Color.black;
             
 
@@ -313,23 +312,13 @@ namespace Script.Game
         }
         
         
-        private IEnumerator TimeToRoom(int door, bool newGame)
+        private IEnumerator TimeToRoom(int door)
         {
-            if (newGame)
-            {
-                yield return new WaitForSeconds(0.9f);
-                _room = Random.Range(0,4);
-                DoorsCondition(0);
-                GenerateRoom(_room);
-            }
-
-            else
-            {
-                yield return new WaitForSeconds(1f);
-                _room = Random.Range(0,4);
-                GenerateRoom(_room);
-                DoorsCondition(door);
-            }
+            
+            yield return new WaitForSeconds(1f);
+            DoorsCondition(door);
+            _room = Random.Range(0,4);
+            GenerateRoom(_room);
             
         }
         
@@ -344,7 +333,7 @@ namespace Script.Game
             if (position == "Up")
             {
                 _fadeAnimator.Play("Fade4");
-                StartCoroutine(TimeToRoom(1,false));
+                StartCoroutine(TimeToRoom(1));
                 StartCoroutine(TimeToPlayer(new Vector3(0f, -2.5f, 0)));
                 ottoGameObject.transform.position = (new Vector3(0f, -2.5f, 0));
             }
@@ -352,7 +341,7 @@ namespace Script.Game
             if (position == "Down")
             {
                 _fadeAnimator.Play("Fade3");
-                StartCoroutine(TimeToRoom(2,false));
+                StartCoroutine(TimeToRoom(2));
                 StartCoroutine(TimeToPlayer(new Vector3(0f, 3.5f, 0)));
                 ottoGameObject.transform.position = (new Vector3(0f, 3.5f, 0));
             }
@@ -360,7 +349,7 @@ namespace Script.Game
             if (position == "Left")
             {
                 _fadeAnimator.Play("Fade1");
-                StartCoroutine(TimeToRoom(3,false));
+                StartCoroutine(TimeToRoom(3));
                 StartCoroutine(TimeToPlayer(new Vector3(7.75f, 0.5f, 0)));
                 ottoGameObject.transform.position = (new Vector3(7.75f, 0.5f, 0));
             }
@@ -368,7 +357,7 @@ namespace Script.Game
             if (position == "Right")
             {
                 _fadeAnimator.Play("Fade1");
-                StartCoroutine(TimeToRoom(4,false));
+                StartCoroutine(TimeToRoom(4));
                 StartCoroutine(TimeToPlayer(new Vector3(-7.75f, 0.5f, 0)));
                 ottoGameObject.transform.position = (new Vector3(-7.75f, 0.5f, 0));
             }
@@ -376,22 +365,6 @@ namespace Script.Game
 
         private void GenerateRoom(int code)
         {
-            
-      
-            if (code == _actRoom )
-            {
-                if (_actRoom == 3)
-                {
-                    code = 0;
-                }
-                else
-                {
-                    code = code + 1;
-                }
-                
-            }
-
-            _actRoom = code;
 
             if (code == 0)
             {
