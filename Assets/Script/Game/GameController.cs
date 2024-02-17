@@ -241,7 +241,7 @@ namespace Script.Game
             FirstRoom();
             
         }
-        private IEnumerator ResetGame()
+            private IEnumerator ResetGame()
         {
             yield return new WaitForSeconds(2f);
             _fadeAnimator.Play("Fade1");
